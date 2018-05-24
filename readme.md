@@ -2,7 +2,7 @@
 
 A plugin for Vue.js(2.0) that make bus events management much more easier.
 
-## How the plugin works
+## How this plugin works
 
 By injecting a global mixins to the Vue constructor, this plugin will register
 handlers of bus events in components'

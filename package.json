@@ -11,6 +11,14 @@
     "build:umd": "rollup --config build/rollup.config.umd.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QoVoQ/vue-smart-bus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QoVoQ/vue-smart-bus/issues"
+  },
+  "homepage": "https://github.com/QoVoQ/vue-smart-bus#readme",
   "keywords": [
     "vue",
     "bus",

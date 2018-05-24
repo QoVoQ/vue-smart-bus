@@ -10,8 +10,10 @@ handlers of bus events in components'
 hook automatically.(If you forget to remove, you are probably
 going to have a memory leak)
 
-Besides,you can also have access to the bus object by `this.$bus` in a Vue component and bind(`$on`)/ trigger(`$emit`) /unbind(`$off`) bus events as normal.
+Besides,you can also have access to the bus object by `this.$bus` in a Vue component and bind(`$on/$once`)/ trigger(`$emit`) /unbind(`$off`) bus events as normal.
 **See the [Vue API Doc](https://vuejs.org/v2/api/#Instance-Methods-Events) for more detail.**
+
+When in `SSR` environment, this plugin will just do nothing. Only in browser environment handlers will be taken care of.
 
 ## How to use it
 
@@ -33,7 +35,7 @@ Vue.use(VueSmartBus)
 iii. add `$_busEvents` attribute to Vue component
 
 $_busEvents should be a function (just like `data`) that
-return a object contains bunch of handlers of bus events
+returns a object containing bunch of handlers of bus events
 you want to listen in the component. All the handlers registered in this way will be remove automatically in lifecycle hook `beforeDestroy`
 
 ```js
@@ -41,7 +43,7 @@ export default {
  ...,
  $_busEvents() {
    return {
-     // listeners registered in attribute `$_busEvents` will be clean up automatically
+     // listeners registered in attribute `$_busEvents` will be cleaned up automatically
      GLOBAL_EVENT_A: this.doSomething,
      GLOBAL_EVENT_B: {
        handler: this.doSomethingElse,
@@ -52,16 +54,13 @@ export default {
          handler: this.doSomethingElse,
          once: true
        },
-       {
-         handler: this.doSomethingElse,
-         once: true
-       }
+       this.doSomethingBigger
      ]
    }
  },
  methods: {
    addOtherBusEventListeners() {
-     // PS: listeners registered in this way need clean up manually
+     // PS: listeners registered in this way need to be cleaned up manually
      this.$bus.$on(GLOBAL_EVENT_OTHER, () => { ... })
    }
  },

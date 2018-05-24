@@ -6,8 +6,12 @@ export default function install(Vue) {
     writable: false
   })
 
+  // @TODO support SSR, ignore listeners registration in server env
   Vue.mixin({
     created() {
+      if (this.$isServer) {
+        return
+      }
       const busEvents = this.$options.$_busEvents &&
         this.$options.$_busEvents.bind(this)()
       if (!busEvents) {
@@ -36,6 +40,9 @@ export default function install(Vue) {
       )
     },
     beforeDestroy() {
+      if (this.$isServer) {
+        return
+      }
       const map = this.$options.$_busEventsMap
       if (!map) {
         return

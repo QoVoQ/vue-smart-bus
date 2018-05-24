@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-bus",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A smart bus for Vue.js",
   "main": "dist/vue-smart-bus.umd.js",
   "module": "dist/vue-smart-bus.esm.js",

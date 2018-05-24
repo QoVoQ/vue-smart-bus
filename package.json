@@ -2,8 +2,8 @@
   "name": "vue-smart-bus",
   "version": "0.0.2",
   "description": "A smart bus for Vue.js",
-  "main": "dist/vue-bus.umd.js",
-  "module": "dist/vue-bus.esm.js",
+  "main": "dist/vue-smart-bus.umd.js",
+  "module": "dist/vue-smart-bus.esm.js",
   "scripts": {
     "build": "rimraf dist && npm run build:browser && npm run build:es && npm run build:umd",
     "build:browser": "rollup --config build/rollup.config.browser.js",

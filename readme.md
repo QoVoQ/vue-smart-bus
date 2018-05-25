@@ -1,6 +1,6 @@
 # vue-smart-bus
 
-A plugin for Vue.js(2.0) that make bus events management much more easier.
+A event bus plugin for Vue.js(2.0) that make bus events management much more easier.
 
 ## How this plugin works
 

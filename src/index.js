@@ -6,7 +6,6 @@ export default function install(Vue) {
     writable: false
   })
 
-  // @TODO support SSR, ignore listeners registration in server env
   Vue.mixin({
     created() {
       if (this.$isServer) {
@@ -21,20 +20,20 @@ export default function install(Vue) {
       this.$options.$_busEventsMap = map
 
       Object.entries(busEvents).forEach(
-        ([key, value]) => {
-          if (Array.isArray(value)) {
-            value.forEach(item => {
-              subscribeFn(key, item, map, this.$bus)
+        ([event, listenerConfig]) => {
+          if (Array.isArray(listenerConfig)) {
+            listenerConfig.forEach(conf => {
+              subscribeFn(event, conf, map, this.$bus)
             })
           } else {
-            subscribeFn(key, value, map, this.$bus)
+            subscribeFn(event, listenerConfig, map, this.$bus)
           }
 
-          function subscribeFn(_key, _val, _map, _bus) {
-            const wayToListen = _val.once ? '$once' : '$on'
-            const fn = _val.handler ? _val.handler.bind(this) : _val.bind(this)
-            _map[_key] ? _map[_key].push(fn) : _map[_key] = [fn]
-            _bus[wayToListen](_key, fn)
+          function subscribeFn(_event, _conf, _map, _bus) {
+            const wayToListen = _conf.once ? '$once' : '$on'
+            const fn = _conf.handler ? _conf.handler.bind(this) : _conf.bind(this)
+            _map[_event] ? _map[_event].push(fn) : _map[_event] = [fn]
+            _bus[wayToListen](_event, fn)
           }
         }
       )
@@ -48,12 +47,12 @@ export default function install(Vue) {
         return
       }
       Object.entries(map).forEach(
-        ([key, value]) => {
-          if (!Array.isArray(value)) {
+        ([event, listeners]) => {
+          if (!Array.isArray(listeners)) {
             return
           }
-          value.forEach(item => {
-            this.$bus.$off(key, item)
+          listeners.forEach(item => {
+            this.$bus.$off(event, item)
           })
         }
       )

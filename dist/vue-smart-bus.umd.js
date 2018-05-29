@@ -1,5 +1,5 @@
 /**
- * vue-smart-bus v0.0.1
+ * vue-smart-bus v0.0.4
  * https://github.com/QoVoQ/vue-smart-bus
  * @license MIT
  */
@@ -21,6 +21,9 @@
       created: function created() {
         var this$1 = this;
 
+        if (this.$isServer) {
+          return
+        }
         var busEvents = this.$options.$_busEvents &&
           this.$options.$_busEvents.bind(this)();
         if (!busEvents) {
@@ -31,22 +34,22 @@
 
         Object.entries(busEvents).forEach(
           function (ref) {
-            var key = ref[0];
-            var value = ref[1];
+            var event = ref[0];
+            var listenerConfig = ref[1];
 
-            if (Array.isArray(value)) {
-              value.forEach(function (item) {
-                subscribeFn(key, item, map, this$1.$bus);
+            if (Array.isArray(listenerConfig)) {
+              listenerConfig.forEach(function (conf) {
+                subscribeFn(event, conf, map, this$1.$bus);
               });
             } else {
-              subscribeFn(key, value, map, this$1.$bus);
+              subscribeFn(event, listenerConfig, map, this$1.$bus);
             }
 
-            function subscribeFn(_key, _val, _map, _bus) {
-              var wayToListen = _val.once ? '$once' : '$on';
-              var fn = _val.handler ? _val.handler.bind(this) : _val.bind(this);
-              _map[_key] ? _map[_key].push(fn) : _map[_key] = [fn];
-              _bus[wayToListen](_key, fn);
+            function subscribeFn(_event, _conf, _map, _bus) {
+              var wayToListen = _conf.once ? '$once' : '$on';
+              var fn = _conf.handler ? _conf.handler.bind(this) : _conf.bind(this);
+              _map[_event] ? _map[_event].push(fn) : _map[_event] = [fn];
+              _bus[wayToListen](_event, fn);
             }
           }
         );
@@ -54,20 +57,23 @@
       beforeDestroy: function beforeDestroy() {
         var this$1 = this;
 
+        if (this.$isServer) {
+          return
+        }
         var map = this.$options.$_busEventsMap;
         if (!map) {
           return
         }
         Object.entries(map).forEach(
           function (ref) {
-            var key = ref[0];
-            var value = ref[1];
+            var event = ref[0];
+            var listeners = ref[1];
 
-            if (!Array.isArray(value)) {
+            if (!Array.isArray(listeners)) {
               return
             }
-            value.forEach(function (item) {
-              this$1.$bus.$off(key, item);
+            listeners.forEach(function (item) {
+              this$1.$bus.$off(event, item);
             });
           }
         );

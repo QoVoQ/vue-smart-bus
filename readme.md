@@ -1,6 +1,9 @@
 # vue-smart-bus
 
 [![Travis](https://travis-ci.com/QoVoQ/vue-smart-bus.svg?branch=master)](https://github.com/QoVoQ/vue-smart-bus)
+[![Codecov](https://img.shields.io/codecov/c/github/QoVoQ/vue-smart-bus.svg)](https://codecov.io/gh/QoVoQ/vue-smart-bus)
+[![Github All Releases](https://img.shields.io/npm/dt/vue-smart-bus.svg)](https://www.npmjs.com/package/vue-smart-bus)
+[![Vue 2.x](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 [![GitHub license](https://img.shields.io/github/license/QoVoQ/vue-smart-bus.svg)](https://github.com/QoVoQ/vue-smart-bus/blob/master/LICENSE)
 
 A event bus plugin for Vue.js(2.0) that make bus events management much more easier.

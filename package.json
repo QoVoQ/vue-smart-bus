@@ -4,6 +4,7 @@
   "description": "A smart event bus for Vue.js",
   "main": "dist/vue-smart-bus.umd.js",
   "module": "dist/vue-smart-bus.esm.js",
+  "unpkg": "dist/vue-smart-bus.min.js",
   "scripts": {
     "build": "rimraf dist && npm run build:browser && npm run build:es && npm run build:umd",
     "build:browser": "rollup --config build/rollup.config.browser.js",

@@ -15,7 +15,7 @@ export default {
   name: 'BusBasic',
   $_busEvents() {
     return {
-    // i. You 3 ways to register: Function | Object | Array<Function | Object>
+    // i. You have 3 ways to register: Function | Object | Array<Function | Object>
     // ii. Even though multiple components register the same bus event, the process
     //     of binding or unbinding listeners works independently on component level.
     //     (Let's say both `compA` and `compB` have registered a bus event

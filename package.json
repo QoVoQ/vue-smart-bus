@@ -10,7 +10,7 @@
     "build:es": "rollup --config build/rollup.config.es.js",
     "build:umd": "rollup --config build/rollup.config.umd.js",
     "test": "jest --coverage",
-    "prepublish": "yarn build && yarn test"
+    "prepare": "yarn build && yarn test"
   },
   "repository": {
     "type": "git",

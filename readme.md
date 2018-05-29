@@ -81,9 +81,9 @@ export default {
 
 ## Features
 
-### Automatically Bind in `created` and Unbind in `beforeDestroy`(only for listeners bond in $_busEvents)
+### i. Automatically Bind in `created` and Unbind in `beforeDestroy`(only for listeners bond in $_busEvents)
 
-### Separation between Components(only for listeners bond in $_busEvents)
+### ii. Separation between Components(only for listeners bond in $_busEvents)
 
 Even though multiple components register the same bus event, the process
 of binding or unbinding listeners works independently on component level.

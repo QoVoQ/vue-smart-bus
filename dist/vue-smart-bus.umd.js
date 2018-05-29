@@ -1,5 +1,5 @@
 /**
- * vue-smart-bus v0.0.5
+ * vue-smart-bus v0.0.6
  * https://github.com/QoVoQ/vue-smart-bus
  * @license MIT
  */

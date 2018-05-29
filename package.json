@@ -9,7 +9,7 @@
     "build:browser": "rollup --config build/rollup.config.browser.js",
     "build:es": "rollup --config build/rollup.config.es.js",
     "build:umd": "rollup --config build/rollup.config.umd.js",
-    "test": "jest && codecov -t $CODECOV_TOKEN",
+    "test": "jest && codecov -t CODECOV_TOKEN",
     "prepare": "yarn build && yarn test"
   },
   "repository": {

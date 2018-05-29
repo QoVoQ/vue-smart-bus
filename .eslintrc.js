@@ -4,9 +4,14 @@ module.exports = {
     sourceType: 'module'
   },
   env: {
-    browser: true
+    browser: true,
+    'jest/globals': true
   },
-  extends: 'standard',
+  plugins: ['jest'],
+  extends: [
+    'standard',
+    'plugin:jest/recommended'
+  ],
   rules: {
     'space-before-function-paren': [2, 'never']
   }

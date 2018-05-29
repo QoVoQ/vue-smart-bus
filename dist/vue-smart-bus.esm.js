@@ -42,7 +42,10 @@ function install(Vue) {
           function subscribeFn(_event, _conf, _map, _bus) {
             var wayToListen = _conf.once ? '$once' : '$on';
             var fn = _conf.handler ? _conf.handler.bind(this) : _conf.bind(this);
-            _map[_event] ? _map[_event].push(fn) : _map[_event] = [fn];
+
+            _map[_event]
+              ? _map[_event].push(fn)
+              : _map[_event] = [fn];
             _bus[wayToListen](_event, fn);
           }
         }
@@ -63,9 +66,6 @@ function install(Vue) {
           var event = ref[0];
           var listeners = ref[1];
 
-          if (!Array.isArray(listeners)) {
-            return
-          }
           listeners.forEach(function (item) {
             this$1.$bus.$off(event, item);
           });

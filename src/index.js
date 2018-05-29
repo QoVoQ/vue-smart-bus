@@ -32,7 +32,10 @@ export default function install(Vue) {
           function subscribeFn(_event, _conf, _map, _bus) {
             const wayToListen = _conf.once ? '$once' : '$on'
             const fn = _conf.handler ? _conf.handler.bind(this) : _conf.bind(this)
-            _map[_event] ? _map[_event].push(fn) : _map[_event] = [fn]
+
+            _map[_event]
+              ? _map[_event].push(fn)
+              : _map[_event] = [fn]
             _bus[wayToListen](_event, fn)
           }
         }
@@ -48,9 +51,6 @@ export default function install(Vue) {
       }
       Object.entries(map).forEach(
         ([event, listeners]) => {
-          if (!Array.isArray(listeners)) {
-            return
-          }
           listeners.forEach(item => {
             this.$bus.$off(event, item)
           })
